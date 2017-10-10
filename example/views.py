@@ -61,4 +61,5 @@ def sign_up(request):
     return render(request, 'example/sign_up.html', {'form': form})
 
 def teacher(request):
-    return render(request, 'example/teacher.html')
+    users = User.objects.select_related('logged_in_user')
+    return render(request, 'example/teacher.html', {'users':users})

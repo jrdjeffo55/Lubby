@@ -2,15 +2,14 @@
 
 {% block content %}
   <a href="{% url 'example:log_out' %}">Log out</a>
-  <br>
-  <ul>
-    {% for user in users %}
-      <!-- NOTE: We escape HTML to prevent XSS attacks. -->
-      <li data-username="{{ user.username|escape }}">
-        {{ user.username|escape }}: {{ user.status|default:'Offline' }}
-      </li>
-    {% endfor %}
-  </ul>
+  <div class="group">
+      <div class='content'>
+    </div>
+    <div class="botbar">
+        <form action="">
+            <input class='poll' type="submit" value="Raise Hand">
+        </form>
+    </div></div>
 {% endblock content %}
 
 {% block script %}

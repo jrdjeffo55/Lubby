@@ -32,8 +32,12 @@ def log_in(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
+            alpha = form.get_user()
             login(request, form.get_user())
-            return redirect(reverse('example:user_list'))
+            if alpha.is_staff == True:
+                return redirect(reverse('example:teacher'))
+            else:                
+                return redirect(reverse('example:user_list'))
         else:
             print(form.errors)
     return render(request, 'example/log_in.html', {'form': form})
@@ -55,3 +59,6 @@ def sign_up(request):
         else:
             print(form.errors)
     return render(request, 'example/sign_up.html', {'form': form})
+
+def teacher(request):
+    return render(request, 'example/teacher.html')

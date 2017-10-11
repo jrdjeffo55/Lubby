@@ -4,6 +4,11 @@
   <a href="{% url 'example:log_out' %}">Log out</a>
   <div class="group">
       <div class='content'>
+        <h2 class='hidden'>Does this make sense?</h2>
+        <form action="" class="hidden">
+          <input type="submit" value='YES!!!'>
+          <input type="submit" value="no...">
+        </form>
     </div>
     <div class="botbar">
         <form action="">
@@ -19,7 +24,7 @@
     socket.onopen = function open() {
       console.log('WebSockets connection created.');
     };
-
+    
     socket.onmessage = function message(event) {
       var data = JSON.parse(event.data);
       // NOTE: We escape JavaScript to prevent XSS attacks.

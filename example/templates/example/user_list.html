@@ -24,7 +24,7 @@
     socket.onopen = function open() {
       console.log('WebSockets connection created.');
     };
-    
+
     socket.onmessage = function message(event) {
       var data = JSON.parse(event.data);
       // NOTE: We escape JavaScript to prevent XSS attacks.
@@ -40,7 +40,11 @@
         user.html(username + ': Offline');
       }
     };
-
+    $('.hidden').show();
+    $('.content').click(function(){
+      alert("Hi");
+      $('.hidden').show();
+    });
     if (socket.readyState == WebSocket.OPEN) {
       socket.onopen();
     }

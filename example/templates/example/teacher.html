@@ -4,11 +4,23 @@
 <a href="{% url 'example:log_out' %}">Log out</a>
 <div class="group">
   <div class='content'>
-
+    <img src="http://images.clipartpanda.com/colorful-hearts-clipart-4a6dae3e5c209275aa3d60fb8c25a8e6.jpg" alt="Mountain View" style="width:304px;height:228px;">
+    <p id='hc'></p>
+    <table>
+        <tr>
+            <th>YES</th>
+            <th>NO</th>
+        </tr>
+        <tr>
+          <td id='td1'></td>
+          <td id='td2'></td>
+        </tr>
+        
+    </table>
 </div>
 <div class="botbar">
     <form action="">
-        <input class='poll' type="submit" value="Clarity Poll">
+        <input class='poll' type="button" value="Clarity Poll">
     </form>
 </div></div>
 <div class='side'>
@@ -31,9 +43,26 @@
     socket.onopen = function open() {
       console.log('WebSockets connection created.');
     };
-
+      var yescount = 0
+      var nocount = 0
+      var handcount = 0
     socket.onmessage = function message(event) {
+      console.log(event.data);
+      if(event.data == "[user] 7"){
+        handcount++
+        $('#hc').html(handcount);
+        $('#hc').show();  
+        $('img').show()};
+      if(event.data == "[user] 11"){
+        yescount++  
+        $('#td1').html(yescount)};
+
+      if(event.data == "[user] 12"){
+        nocount++  
+        $('#td2').html(nocount)  
+    };
       var data = JSON.parse(event.data);
+      
       // NOTE: We escape JavaScript to prevent XSS attacks.
       var username = encodeURI(data['username']);
       var user = $('li').filter(function () {
@@ -46,14 +75,23 @@
       else {
         user.html(username + ': Offline');
       }
+      
     };
+      
 
     if (socket.readyState == WebSocket.OPEN) {
       socket.onopen();
     }
-    $('.poll').click(function(){
-      socket.$('.hidden').show()
+    $('.poll').click(function(event){
+      // var abc = 10
+      
+      socket.send(JSON.stringify(10));
+    });
+    $('img').click(function(){
+      handcount=0
+      $('#hc').hide();
+      $('img').hide();
+    });
     
-});
   </script>
 {% endblock script %}

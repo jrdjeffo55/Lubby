@@ -4,15 +4,16 @@
   <a href="{% url 'example:log_out' %}">Log out</a>
   <div class="group">
       <div class='content'>
-        <h2 class='hidden'>Does this make sense?</h2>
-        <form action="" class="hidden">
-          <input type="submit" value='YES!!!'>
-          <input type="submit" value="no...">
+        <h2 class='hi'>Does this make sense?</h2>
+        <form action="/clarify/" method="POST" class="hi">
+          {% csrf_token %}
+          <input id="yes" type="submit" value='Yes' name='answer'>
+          <input id="no" type="submit" value="No" name='answer'>
         </form>
     </div>
     <div class="botbar">
         <form action="">
-            <input class='poll' type="submit" value="Raise Hand">
+            <input class='poll' id='raise' type="button" value="Raise Hand">
         </form>
     </div></div>
 {% endblock content %}
@@ -26,23 +27,31 @@
     };
     
     socket.onmessage = function message(event) {
-      var data = JSON.parse(event.data);
-      // NOTE: We escape JavaScript to prevent XSS attacks.
-      var username = encodeURI(data['username']);
-      var user = $('li').filter(function () {
-        return $(this).data('username') == username;
-      });
-
-      if (data['is_logged_in']) {
-        user.html(username + ': Online');
-      }
-      else {
-        user.html(username + ': Offline');
-      }
+      // var data = JSON.parse(event.data);
+      console.log(event.data)
+    if(event.data == "[user] 10"){  
+      $('.hi').show();
+    }
+    
+      // alert(event.data);
+    
     };
 
     if (socket.readyState == WebSocket.OPEN) {
       socket.onopen();
     }
+    $('#raise').click(function(event){
+      socket.send(JSON.stringify(7));});
+
+    $('#yes').click(function(event){
+      socket.send(JSON.stringify(11));});
+
+    $('#no').click(function(event){
+      socket.send(JSON.stringify(12));  
+
+    });  
+
+  
   </script>
+
 {% endblock script %}

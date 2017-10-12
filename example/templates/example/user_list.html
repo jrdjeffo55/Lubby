@@ -36,11 +36,8 @@
       // alert(event.data);
     
     };
-    $('.hidden').show();
-    $('.content').click(function(){
-      alert("Hi");
-      $('.hidden').show();
-    });
+    
+    
     if (socket.readyState == WebSocket.OPEN) {
       socket.onopen();
     }

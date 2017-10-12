@@ -8,8 +8,8 @@
     <p id='hc'></p>
     <table>
         <tr>
-            <th>YES</th>
-            <th>NO</th>
+            <th class='yes'>YES</th>
+            <th class='no'>NO</th>
         </tr>
         <tr>
           <td id='td1'></td>
@@ -70,10 +70,10 @@
       });
 
       if (data['is_logged_in']) {
-        user.html(username + ': Online');
+        user.html(username + ': Present');
       }
       else {
-        user.html(username + ': Offline');
+        user.html(username + ': Absent');
       }
       
     };
@@ -83,7 +83,10 @@
       socket.onopen();
     }
     $('.poll').click(function(event){
-      // var abc = 10
+      yescount = 0;
+      nocount = 0;
+      $('#td1').html(yescount);
+      $('#td2').html(nocount);
       
       socket.send(JSON.stringify(10));
     });

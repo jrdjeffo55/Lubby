@@ -1,7 +1,9 @@
 {% extends 'example/base.html' %}
 
 {% block content %}
-  <form action="{% url 'example:log_in' %}" method="post">
+{% load static %}
+<header><img id="sock" src="{% static "example/banner.gif" %}" alt="My image"/></header>
+  <form id='log' action="{% url 'example:log_in' %}" method="post">
     {% csrf_token %}
     {% for field in form %}
       <div>
@@ -11,5 +13,6 @@
     {% endfor %}
     <button type="submit">Log in</button>
   </form>
-  <p>Don't have an account? <a href="{% url 'example:sign_up' %}">Sign up!</a></p>
+  <p id="signup">Don't have an account? <a href="{% url 'example:sign_up' %}">Sign up!</a></p>
 {% endblock content %}
+

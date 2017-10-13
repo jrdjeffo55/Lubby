@@ -1,15 +1,16 @@
 {% extends 'example/base.html' %}
 
 {% block content %}
-<a href="{% url 'example:log_out' %}">Log out</a>
+<a id='logout1' href="{% url 'example:log_out' %}">Log out</a>
 <div class="group">
   <div class='content'>
-    <img src="http://images.clipartpanda.com/colorful-hearts-clipart-4a6dae3e5c209275aa3d60fb8c25a8e6.jpg" alt="Mountain View" style="width:304px;height:228px;">
+    {% load static %}
+    <img id="hands" src="{% static "example/handwave.gif" %}" alt="My hand"/>
     <p id='hc'></p>
     <table>
         <tr>
-            <th>YES</th>
-            <th>NO</th>
+            <th class='yes'>YES</th>
+            <th class='no'>NO</th>
         </tr>
         <tr>
           <td id='td1'></td>
@@ -70,10 +71,10 @@
       });
 
       if (data['is_logged_in']) {
-        user.html(username + ': Online');
+        user.html(username + ': Present');
       }
       else {
-        user.html(username + ': Offline');
+        user.html(username + ': Absent');
       }
       
     };
@@ -83,7 +84,10 @@
       socket.onopen();
     }
     $('.poll').click(function(event){
-      // var abc = 10
+      yescount = 0;
+      nocount = 0;
+      $('#td1').html(yescount);
+      $('#td2').html(nocount);
       
       socket.send(JSON.stringify(10));
     });

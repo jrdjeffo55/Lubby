@@ -1,7 +1,7 @@
 {% extends 'example/base.html' %}
 
 {% block content %}
-  <a href="{% url 'example:log_out' %}">Log out</a>
+  <a id='logout2' href="{% url 'example:log_out' %}">Log out</a>
   <div class="group">
       <div class='content'>
         <h2 class='hi'>Does this make sense?</h2>
@@ -25,7 +25,7 @@
     socket.onopen = function open() {
       console.log('WebSockets connection created.');
     };
-    
+
     socket.onmessage = function message(event) {
       
       console.log(event.data)
@@ -36,7 +36,8 @@
       // alert(event.data);
     
     };
-
+    
+    
     if (socket.readyState == WebSocket.OPEN) {
       socket.onopen();
     }

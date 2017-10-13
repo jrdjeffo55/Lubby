@@ -1,7 +1,7 @@
 {% extends 'example/base.html' %}
 
 {% block content %}
-  <a href="{% url 'example:log_out' %}">Log out</a>
+  <a id='logout2' href="{% url 'example:log_out' %}">Log out</a>
   <div class="group">
       <div class='content'>
         <h2 class='hi'>Does this make sense?</h2>
@@ -27,7 +27,7 @@
     };
 
     socket.onmessage = function message(event) {
-      // var data = JSON.parse(event.data);
+      
       console.log(event.data)
     if(event.data == "[user] 10"){  
       $('.hi').show();

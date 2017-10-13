@@ -1,10 +1,11 @@
 {% extends 'example/base.html' %}
 
 {% block content %}
-<a href="{% url 'example:log_out' %}">Log out</a>
+<a id='logout1' href="{% url 'example:log_out' %}">Log out</a>
 <div class="group">
   <div class='content'>
-    <img src="http://images.clipartpanda.com/colorful-hearts-clipart-4a6dae3e5c209275aa3d60fb8c25a8e6.jpg" alt="Mountain View" style="width:304px;height:228px;">
+    {% load static %}
+    <img id="hands" src="{% static "example/handwave.gif" %}" alt="My hand"/>
     <p id='hc'></p>
     <table>
         <tr>

@@ -1,2 +1,4 @@
 *.pyc
+/example/*.pyc
+/base_project/*.pyc
 db.sqlite3
